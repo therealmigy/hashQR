@@ -1,16 +1,19 @@
-var shortId = require('shortid'),
-    qr      = require('qr-image');
+import { nanoid } from 'nanoid'
+import qr from 'qr-image';
+import * as fs from 'node:fs';
 
-//Generate 10 ids
-
-var i = 10;
-var arr = [];
-while (i--) {
-    arr.push(shortId.generate());
+const qrCodePath = './qr-codes';
+let idx = process.argv[2] || 10; // Process # specified in CLI or default to 10
+let nanoIds = [];
+while (idx--) {
+    nanoIds.push(nanoid());
 }
-console.log(arr);
 
-arr.toString().split(",").forEach(function(value){
-    var qr_png = qr.image(value, { type: 'png'});
-    qr_png.pipe(require('fs').createWriteStream(value+'.png'));
+if (!fs.existsSync(qrCodePath)) {
+    fs.mkdirSync(qrCodePath);
+}
+
+nanoIds.map((value) => {
+    const qrImage = qr.image(value, { type: 'png'});
+    qrImage.pipe(fs.createWriteStream(`${qrCodePath}/${value}.png`));
 });
