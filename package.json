@@ -1,15 +1,16 @@
 {
-  "name": "txt-qr-generator",
-  "version": "1.0.0",
-  "description": "",
+  "name": "nanoid-qr-code",
+  "version": "2.0.0",
+  "description": "Generate unique QR codes with NanoID! Originally built for a custom office library application.",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "qr-image": "^3.2.0",
-    "shortid": "^2.2.8"
+    "nanoid": "^5.0.7",
+    "qr-image": "^3.2.0"
   }
 }
